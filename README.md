@@ -1,6 +1,6 @@
 # How to Run
 1. Clone the repository:
-   git clone https://github.com/your-username/Tic-Tac-Toe.git
+   git clone https://github.com/Friday64/Tic-Tac-Toe.git
 2. Install dependencies:
    pip3 install flask
 3. Run the app:
