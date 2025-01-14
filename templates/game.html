@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; justify-content: center; margin-top: 20px; }
+        .cell { width: 100px; height: 100px; font-size: 2em; display: flex; align-items: center; justify-content: center; background: #f4f4f4; cursor: pointer; border: 1px solid #ccc; }
+        .cell.taken { cursor: not-allowed; color: #888; }
+        .winner { margin-top: 20px; font-size: 1.5em; color: green; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+
+    <div class="board">
+        {% for i in range(9) %}
+            <form method="post" action="{{ url_for('make_move', cell=i) }}" style="display: inline;">
+                <button type="submit" class="cell {{ 'taken' if board[i] != ' ' else '' }}" {% if board[i] != ' ' or winner or current_player != 'Player' %}disabled{% endif %}>
+                    {{ board[i] }}
+                </button>
+            </form>
+        {% endfor %}
+    </div>
+
+    {% if winner %}
+        <p class="winner">
+            {% if winner == 'Draw' %}
+                It's a draw!
+            {% else %}
+                {{ 'Player' if winner == player_symbol else 'Computer' }} ({{ winner }}) wins!
+            {% endif %}
+        </p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('reset_game') }}">
+        <button type="submit">Reset Game</button>
+    </form>
+</body>
+</html>
