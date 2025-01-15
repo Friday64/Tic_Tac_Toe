@@ -1,0 +1,5 @@
+#Python version
+python_version==3.9.2
+
+#Flask and its dependencies
+Flask==2.2.5
